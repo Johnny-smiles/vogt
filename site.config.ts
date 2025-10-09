@@ -7,103 +7,123 @@ export const siteConfig = {
 
     // Contact
     phone: '+1-651-470-9491',
-    phoneDisplay: "{{PHONE_DISPLAY}}",      // Pretty display
+    phoneDisplay: '(651) 470-9491',
     email: 'info@vogtelectric.com',
 
     // Location
     location: {
-        street: "{{ADDRESS_STREET}}",
-        city: "{{ADDRESS_CITY}}",
-        state: "{{ADDRESS_STATE}}",
-        zip: "{{ADDRESS_ZIP}}",
-        country: "{{ADDRESS_COUNTRY}}",
-        latitude: "",    // optional
-        longitude: ""    // optional
+        street: '2950 Ideal Ave S',
+        city: 'Oakdale',
+        state: 'MN',
+        zip: '55128',
+        country: 'US',
+        latitude: '',
+        longitude: ''
     },
 
     // Business meta
-    description: "Vogt Electric is a locally owned electrical contractor serving homeowners and businesses across the Twin Cities. From panel upgrades to lighting and EV charger installations, we deliver safe, reliable, and efficient electrical solutions.",
-    hours: "{{BUSINESS_HOURS}}",
-    businessType: "LocalBusiness", // Options: 'LocalBusiness', 'HVACBusiness', 'AutoRepair', etc.
+    description: 'Vogt Electric is a locally owned electrical contractor serving homeowners and businesses across the Twin Cities. From panel upgrades to lighting and EV charger installations, we deliver safe, reliable, and efficient electrical solutions.',
+    hours: 'Mo–Fr 07:00–17:00',
+    businessType: 'LocalBusiness',
 
     // Assets
-    socialImage: "/og-image.jpg",
-    favicon: "/favicon.png",
+    socialImage: '/og-image.jpg',
+    favicon: '/favicon.png',
 
     // Theme
     theme: {
-        primaryColor:  "{{PRIMARY_COLOR}}",  // teal
-        secondaryColor:"{{SECONDARY_COLOR}}",  // light bg
-        accentColor:   "{{ACCENT_COLOR}}",  // warm CTA
-        fontFamily:    "{{FONT_FAMILY}}",
-        borderRadius:  "{{BORDER_RADIUS}}"
+        primaryColor: '#4A592E',
+        secondaryColor: '#F8F8F8',
+        accentColor: '#6B6B6B',
+        fontFamily: "'Russo One','Inter',sans-serif",
+        borderRadius: '24px'
     },
 
-    // Hero copy (used in Index sections below if you want to bind it)
+    // Hero copy (consumed by HeroSection.vue)
     hero: {
-        eyebrow: "{{HERO_EYEBROW}}",
-        headline: "{{HERO_HEADLINE}}",
-        subheadline: "{{HERO_SUBHEADLINE}}",
-        ctaPrimaryLabel: "{{CTA_PRIMARY}}",
-        ctaSecondaryLabel: "{{CTA_SECONDARY}}"
+        eyebrow: 'Licensed • Bonded • Insured',
+        headline: 'Reliable electrical upgrades for Oakdale properties',
+        subheadline: 'Panel, lighting, and EV installs handled tidily with up-front guidance.',
+        ctaPrimaryLabel: 'Call (651) 470-9491',
+        ctaSecondaryLabel: 'Schedule service',
+        ctaBandLabel: 'Explore services'
     },
 
-    // Services summary (HomepageServices already handles grid; this supports extra sections on index)
+    // Services summary
     services: [
         {
-            title: "Paintless Dent Repair",
-            blurb: "Door dings, creases, and small collisions corrected without repainting.",
-            bullets: ["Mobile or drop-off", "Same-day on many jobs", "Preserve OEM paint"]
+            title: 'Residential Electrical',
+            blurb: 'Upgrades, troubleshooting, and lighting that keep your home safe.',
+            bullets: [
+                'Panel replacements and capacity planning',
+                'Interior, exterior, and landscape lighting design',
+                'Whole-home surge and safety upgrades'
+            ]
         },
         {
-            title: "Hail Repair",
-            blurb: "Insurance-friendly estimates and panel-by-panel hail dent removal.",
-            bullets: ["Work with your insurer", "Multi-panel correction", "Keep CarFax clean"]
+            title: 'Commercial Electrical',
+            blurb: 'Reliable contracting for tenant improvements and light industrial work.',
+            bullets: [
+                'Build-outs, retrofits, and code corrections',
+                'Lighting upgrades and energy management',
+                'Maintenance plans that prevent downtime'
+            ]
         },
         {
-            title: "Detailing & Add-ons",
-            blurb: "Interior/exterior detailing, scratch/scuff removal, ceramic coating.",
-            bullets: ["Express & full detail", "Scratch buffing", "Ceramic protection"]
+            title: 'EV Charger Installation',
+            blurb: 'Level 2 charging stations for homes, fleets, and workplaces.',
+            bullets: [
+                'Load calculations and permitting handled in-house',
+                'Wallbox, ChargePoint, and manufacturer integrations',
+                'Post-install testing and walk-through training'
+            ]
         }
     ],
 
     // Why choose us
     valueProps: [
-        { title: "OEM Paint Preserved", text: "No filler. No repaint. Just clean metalwork." },
-        { title: "Mobile Service",      text: "We can come to you for minor work or schedule drop-off." },
-        { title: "Insurance Friendly",  text: "Streamlined estimates and coordination on hail events." }
+        { title: 'Code-Perfect Work', text: 'Projects documented and inspected so every upgrade meets Minnesota code.' },
+        { title: 'Respectful Scheduling', text: 'We arrive when promised and keep job sites neat from start to finish.' },
+        { title: 'Transparent Pricing', text: 'Clear options and pricing before we pull a wire or open a panel.' }
     ],
 
-    // Reviews (simple placeholders; replace with real quotes when ready)
+    // Reviews (short social proof)
     reviews: [
-        { name: "Sarah M.", text: "Flawless result. You can’t tell there was a dent at all." },
-        { name: "Daniel K.", text: "Fast mobile repair at my office. Super convenient." },
-        { name: "Alyssa R.", text: "Handled hail damage quickly and worked with my insurer." }
+        { name: 'Jessica L.', text: 'Vogt Electric rewired our kitchen remodel, coordinated inspections, and left the space spotless.' },
+        { name: 'Marcus T.', text: 'Their crew upgraded our service panel and EV charger in one day with zero surprises.' },
+        { name: 'Trina P.', text: 'Great communication and tidy work on our shop lighting retrofit. Highly recommend.' }
     ],
 
-    // FAQs
+    // FAQs surfaced on the homepage
     faqs: [
         {
-            q: "How long does PDR take?",
-            a: "Small dings can be done in hours. Multi-panel hail can take longer depending on severity."
+            q: 'Do you handle small repair calls?',
+            a: 'Yes. We help with tripped breakers, faulty outlets, and minor troubleshooting for homes and businesses.'
         },
         {
-            q: "Do you repaint?",
-            a: "No. PDR preserves the OEM paint by massaging the dent from behind the panel."
+            q: 'Can you work with my general contractor?',
+            a: 'Absolutely. We coordinate schedules, permitting, and inspections to keep renovations moving.'
         },
         {
-            q: "Can I text photos for an estimate?",
-            a: "Yes—text a few angles and include year/make/model for the quickest quote."
+            q: 'Do you install customer-supplied fixtures?',
+            a: 'We can install fixtures you provide once we verify compatibility and safety requirements.'
+        },
+        {
+            q: 'What areas do you serve?',
+            a: 'We handle projects across Oakdale, Woodbury, Maplewood, Stillwater, and the east side of St Paul.'
         }
     ],
 
     // Service areas
-    serviceAreas: "{{SERVICE_AREAS}}",
+    serviceAreas: ['Oakdale', 'Woodbury', 'Maplewood', 'Stillwater', 'St Paul'],
 
-    // Social links (optional)
+    // Social links
     social: {
-        nextdoor: "{{SOCIAL_NEXTDOOR}}",
-        facebook: "{{SOCIAL_FACEBOOK}}",
-        yelp: "{{SOCIAL_YELP}}"
+        website: 'https://www.vogtelectric.com',
+        gbp: 'https://www.google.com/maps/place/Vogt+Electric/@44.981,-92.974',
+        facebook: 'https://www.facebook.com/VogtElectricLLC',
+        nextdoor: 'https://nextdoor.com/pages/vogt-electric-llc-woodbury-mn/',
+        instagram: '',
+        yelp: ''
     }
 }

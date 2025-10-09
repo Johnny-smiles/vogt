@@ -1,52 +1,104 @@
 <template>
-    <section
-        class="relative min-h-[56vh] sm:min-h-[60vh] md:min-h-[65vh] flex items-center justify-center overflow-hidden bg-brand-gradient py-10 sm:py-14"
-    >
-        <!-- Decorative background image -->
-        <NuxtImg
-            src="/pdr-hero.jpg"
-            alt=""
-            aria-hidden="true"
-            role="presentation"
-            width="1800"
-            height="900"
-            sizes="(max-width: 1024px) 100vw, 1200px"
-            preload
-            fetchpriority="high"
-            placeholder
-            class="absolute inset-0 w-full h-full object-cover opacity-35 mix-blend-overlay"
-        />
+    <!-- Hero layout variant: with-cta-band -->
+    <section class="relative overflow-hidden bg-brand-gradient text-white">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -top-24 -right-20 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 h-40 w-full bg-gradient-to-t from-black/20 to-transparent"></div>
+        </div>
 
-        <!-- Soft dark veil -->
-        <div class="absolute inset-0 bg-black/30" />
+        <div class="relative section-boxed py-20 sm:py-24 lg:py-28">
+            <div class="grid gap-12 lg:grid-cols-[1.15fr,0.85fr] items-center">
+                <div class="space-y-6 lg:space-y-8 text-left">
+                    <div class="flex flex-wrap gap-3 items-center" v-if="heroContent.eyebrow || cityRegion">
+                        <span v-if="heroContent.eyebrow" class="chip bg-white/10 text-white/90 border-white/30">
+                            {{ heroContent.eyebrow }}
+                        </span>
+                        <span v-if="cityRegion" class="chip bg-white/10 text-white/80 border-white/20">
+                            Serving {{ cityRegion }}
+                        </span>
+                    </div>
 
-        <!-- Headline & CTAs -->
-        <div
-            class="relative z-10 text-center text-white px-4 drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)] max-w-3xl mx-auto"
-        >
-            <p class="text-white/90 font-semibold tracking-wide mb-2">
-                {{HERO_EYEBROW}}
-            </p>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl drop-shadow-xl">
+                        {{ heroContent.headline }}
+                    </h1>
 
-            <!-- Enhanced contrast: full white + stronger drop-shadow -->
-            <h1
-                class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-white drop-shadow-lg"
-            >
-                {{HERO_HEADLINE}}
-            </h1>
+                    <p class="text-base sm:text-lg text-white/90 max-w-2xl leading-relaxed">
+                        {{ heroContent.subheadline }}
+                    </p>
 
-            <!-- Enhanced contrast: full white + subtle drop-shadow -->
-            <p class="mt-3 sm:mt-4 text-base sm:text-lg text-white drop-shadow-md">
-                {{HERO_SUBHEADLINE}}
-            </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a :href="`tel:${siteConfig.phone}`" class="btn-primary">
+                            {{ heroContent.ctaPrimary }}
+                        </a>
+                        <NuxtLink to="/contact" class="btn-accent">
+                            {{ heroContent.ctaSecondary }}
+                        </NuxtLink>
+                    </div>
 
-            <div class="mt-6 sm:mt-8 flex flex-wrap gap-3 justify-center">
-                <a :href="`tel:${siteConfig.phone}`" class="btn-primary">
-                    {{CTA_PRIMARY}}
-                </a>
-                <NuxtLink to="/contact" class="btn-accent text-black">
-                    {{CTA_SECONDARY}}
-                </NuxtLink>
+                    <div v-if="displayAreas.length" class="flex flex-wrap gap-2 pt-4">
+                        <span
+                            v-for="area in displayAreas"
+                            :key="area"
+                            class="px-4 py-1 rounded-full bg-white/10 text-xs font-semibold tracking-wide uppercase"
+                        >
+                            {{ area }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card-box bg-white/90 text-brand-primary shadow-2xl shadow-black/30 space-y-6">
+                    <p class="uppercase tracking-[0.3em] text-xs text-brand-accent">
+                        Licensed • Insured • Local
+                    </p>
+                    <h2 class="text-2xl sm:text-3xl text-brand-dark">
+                        Dependable electricians for Oakdale and the east metro.
+                    </h2>
+                    <div class="border-t border-brand-primary/20 pt-6 space-y-4 text-brand-dark">
+                        <div class="flex items-center gap-4 text-lg font-medium">
+                            <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-primary text-white text-xl">
+                                ⚡
+                            </span>
+                            <div>
+                                <p class="text-sm uppercase tracking-wide text-brand-accent">Call or Text</p>
+                                <a :href="`tel:${siteConfig.phone}`" class="text-2xl font-semibold text-brand-dark hover:text-brand-primary">
+                                    {{ prettyPhone }}
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm uppercase tracking-wide text-brand-accent">Hours</p>
+                            <p class="text-lg font-medium">{{ siteConfig.hours || 'Monday – Friday 7am to 5pm' }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm uppercase tracking-wide text-brand-accent">Email</p>
+                            <a :href="`mailto:${siteConfig.email}`" class="text-lg font-medium hover:text-brand-primary">
+                                {{ siteConfig.email }}
+                            </a>
+                        </div>
+                    </div>
+                    <NuxtLink to="/services" class="btn-outline w-full justify-center">
+                        {{ heroContent.ctaBand }}
+                    </NuxtLink>
+                </div>
+            </div>
+
+            <div class="mt-12 lg:mt-16">
+                <div class="w-full rounded-[32px] border border-white/15 bg-white/10 px-6 py-5 sm:px-10 sm:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 backdrop-blur">
+                    <div class="text-sm uppercase tracking-[0.25em] text-white/70">
+                        Fast troubleshooting • Clean installs • Respectful pros
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <NuxtLink to="/services/residential-electrical" class="btn-accent">
+                            Residential
+                        </NuxtLink>
+                        <NuxtLink to="/services/commercial-electrical" class="btn-accent">
+                            Commercial
+                        </NuxtLink>
+                        <NuxtLink to="/services/ev-charger-installation" class="btn-accent">
+                            EV Chargers
+                        </NuxtLink>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -56,6 +108,37 @@
 import { computed } from 'vue'
 import { siteConfig } from '~/site.config'
 
+const cityRegion = computed(() => {
+    const city = siteConfig.location?.city
+    const state = siteConfig.location?.state
+    if (city && state) return `${city}, ${state}`
+    return city || state || ''
+})
+
+const displayAreas = computed(() => {
+    const areas = siteConfig.serviceAreas
+    if (Array.isArray(areas)) return areas
+    if (typeof areas === 'string') {
+        return areas
+            .split(',')
+            .map((area) => area.trim())
+            .filter(Boolean)
+    }
+    return []
+})
+
+const heroContent = computed(() => {
+    const hero = siteConfig.hero || {}
+    return {
+        eyebrow: hero.eyebrow || 'Power for every project',
+        headline: hero.headline || 'Reliable electrical upgrades that last',
+        subheadline: hero.subheadline || 'Licensed electricians delivering tidy installs, fast diagnostics, and code-perfect results.',
+        ctaPrimary: hero.ctaPrimaryLabel || 'Call Now',
+        ctaSecondary: hero.ctaSecondaryLabel || 'Book an Estimate',
+        ctaBand: hero.ctaBandLabel || 'Explore services'
+    }
+})
+
 const prettyPhone = computed(() => {
     const digits = (siteConfig.phone || '').replace(/[^0-9]/g, '')
     if (digits.length === 11 && digits.startsWith('1')) return `(${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`
@@ -63,7 +146,3 @@ const prettyPhone = computed(() => {
     return siteConfig.phone
 })
 </script>
-
-<style scoped>
-/* Buttons + gradient provided by your global CSS/Tailwind utilities */
-</style>

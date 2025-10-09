@@ -52,18 +52,18 @@
                     >
                         <li><NuxtLink to="/services" class="block px-4 py-2 hover:bg-brand-light" @click="closeAll">All Services</NuxtLink></li>
                         <li class="border-t mx-2 my-1"></li>
-                        <li><NuxtLink to="/services/service-a" class="block px-4 py-2 hover:bg-brand-light" @click="closeAll">Service A</NuxtLink></li>
-                        <li><NuxtLink to="/services/service-b" class="block px-4 py-2 hover:bg-brand-light" @click="closeAll">Service B</NuxtLink></li>
-                        <li><NuxtLink to="/services/service-c" class="block px-4 py-2 hover:bg-brand-light" @click="closeAll">Service C</NuxtLink></li>
+                        <li><NuxtLink to="/services/residential-electrical" class="block px-4 py-2 hover:bg-brand-light" @click="closeAll">Residential Electrical</NuxtLink></li>
+                        <li><NuxtLink to="/services/commercial-electrical" class="block px-4 py-2 hover:bg-brand-light" @click="closeAll">Commercial Electrical</NuxtLink></li>
+                        <li><NuxtLink to="/services/ev-charger-installation" class="block px-4 py-2 hover:bg-brand-light" @click="closeAll">EV Charger Installation</NuxtLink></li>
                     </ul>
                 </li>
 
                 <!-- Services in mobile drawer -->
                 <li class="sm:hidden flex flex-col items-end space-y-2 w-full">
                     <NuxtLink to="/services" class="hover:text-brand-primary" @click="closeAll">All Services</NuxtLink>
-                    <NuxtLink to="/services/service-a" class="hover:text-brand-primary" @click="closeAll">Service A</NuxtLink>
-                    <NuxtLink to="/services/service-b" class="hover:text-brand-primary" @click="closeAll">Service B</NuxtLink>
-                    <NuxtLink to="/services/service-c" class="hover:text-brand-primary" @click="closeAll">Service C</NuxtLink>
+                    <NuxtLink to="/services/residential-electrical" class="hover:text-brand-primary" @click="closeAll">Residential Electrical</NuxtLink>
+                    <NuxtLink to="/services/commercial-electrical" class="hover:text-brand-primary" @click="closeAll">Commercial Electrical</NuxtLink>
+                    <NuxtLink to="/services/ev-charger-installation" class="hover:text-brand-primary" @click="closeAll">EV Charger Installation</NuxtLink>
                     <NuxtLink to="/contact" class="hover:text-brand-primary" @click="closeAll">Contact</NuxtLink>
                 </li>
 

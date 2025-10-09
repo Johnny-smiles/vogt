@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-8">
         <h3 class="text-2xl font-bold text-gray-900 mb-2">Service Areas</h3>
-        <p class="text-gray-600">We proudly serve the {{ siteConfig.serviceAreas }} and surrounding communities.</p>
+        <p class="text-gray-600">We proudly serve {{ serviceAreaLine }} and surrounding communities.</p>
       </div>
       
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -26,5 +26,12 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { siteConfig } from '~/site.config'
+
+const serviceAreaLine = computed(() => {
+    const areas = siteConfig.serviceAreas
+    if (Array.isArray(areas)) return areas.join(', ')
+    return areas
+})
 </script>

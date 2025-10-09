@@ -71,33 +71,38 @@
                     </div>
                 </div>
 
-                <!-- Vehicle & location -->
+                <!-- Project details -->
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block font-medium mb-1">Vehicle (Year / Make / Model)</label>
-                        <input
-                            type="text"
-                            name="vehicle"
-                            placeholder="e.g., 2021 Toyota Camry"
-                            class="w-full border border-black/10 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                        />
-                    </div>
-                    <div>
-                        <label class="block font-medium mb-1">Repair Location</label>
+                        <label class="block font-medium mb-1">Property Type</label>
                         <select
-                            name="location"
+                            name="propertyType"
                             class="w-full border border-black/10 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-primary"
                         >
-                            <option>Mobile Service (onsite)</option>
-                            <option>Drop-off in {{ADDRESS_CITY}}</option>
-                            <option>Either</option>
+                            <option>Homeowner / Residential</option>
+                            <option>Business / Commercial</option>
+                            <option>Contractor / Builder</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Project Focus</label>
+                        <select
+                            name="projectType"
+                            class="w-full border border-black/10 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                        >
+                            <option>Panel upgrade or service change</option>
+                            <option>Lighting installation or retrofit</option>
+                            <option>EV charger installation</option>
+                            <option>General electrical troubleshooting</option>
+                            <option>Other electrical work</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- Photos -->
                 <div>
-                    <label class="block font-medium mb-1">Photos (up to 5)</label>
+                    <label class="block font-medium mb-1">Photos / Plans (up to 5)</label>
                     <input
                         type="file"
                         name="photos"
@@ -106,7 +111,7 @@
                         class="w-full border border-black/10 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-primary"
                     />
                     <p class="text-sm text-neutral-600 mt-2">
-                        Tip: Stand back 3–5 ft and include reflection lines. Add 2–3 angles if possible.
+                        Tip: Include panel photos, service labels, or lighting areas so we can review load requirements before we arrive.
                     </p>
                 </div>
 
@@ -116,7 +121,7 @@
                     <textarea
                         name="message"
                         rows="5"
-                        placeholder="Where is the dent? When did it occur? Any prior paint work on that panel?"
+                        placeholder="Tell us about the space, desired timeline, budget considerations, and any existing electrical concerns."
                         class="w-full border border-black/10 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-primary"
                     ></textarea>
                 </div>
@@ -130,12 +135,12 @@
 
             <!-- Alt CTA -->
             <div class="mt-10 bg-brand-gradient rounded-2xl p-6 md:p-8 text-white">
-                <h2 class="text-2xl font-bold">Text Photos for the Fastest Quote</h2>
+                <h2 class="text-2xl font-bold">Text Plans for the Fastest Response</h2>
                 <p class="mt-2 text-white/90">
-                    Send 2–3 angles and your year/make/model. We’ll reply with an estimate and available time slots.
+                    Send panel photos, project sketches, or equipment lists. We’ll reply with next steps and available time windows.
                 </p>
                 <div class="mt-4">
-                    <a :href="`sms:${phone}?body=Hi%20{{SITE_NAME}}%2C%20I%27d%20like%20an%20estimate.`" class="btn-primary">
+                    <a :href="`sms:${phone}?body=${smsBody}`" class="btn-primary">
                         Text {{ phoneDisplay }}
                     </a>
                 </div>
@@ -171,4 +176,6 @@ const phoneDisplay = computed(() => {
     if (digits.length === 10) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`
     return phone.value
 })
+
+const smsBody = computed(() => encodeURIComponent(`Hi ${siteConfig.siteName}, I'd like to schedule electrical service.`))
 </script>

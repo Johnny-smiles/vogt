@@ -1,4 +1,9 @@
-// nuxt.config.ts
+import { defineNuxtConfig } from 'nuxt/config'
+import { siteConfig } from './site.config'
+
+const siteUrl = siteConfig.siteUrl.replace(/\/$/, '')
+const analyticsDomain = new URL(siteConfig.siteUrl).hostname
+
 export default defineNuxtConfig({
     // SSR + static output
     ssr: true,
@@ -6,70 +11,55 @@ export default defineNuxtConfig({
         preset: 'static',
         prerender: {
             crawlLinks: true,
-            failOnError: false, // keep going even if some links/images 404 during crawl
-            ignore: [
-                '/_ipx/**',   // ignore IPX-transformed URLs
-                '/privacy',   // add these pages later
-                '/terms'
-            ]
-            // If you want to lock down to explicit pages only, set crawlLinks:false and add routes:[...]
+            failOnError: false,
+            ignore: ['/_ipx/**', '/privacy', '/terms']
         }
     },
 
-    // <head> config for {{SITE_NAME}}
+    // <head> config for Vogt Electric
     app: {
         head: {
             htmlAttrs: { lang: 'en' },
-            title: '{{SITE_NAME}} — {{HERO_HEADLINE}}',
+            title: `${siteConfig.siteName} — ${siteConfig.hero.headline}`,
             meta: [
                 { charset: 'utf-8' },
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-                {
-                    name: 'description',
-                    content: '{{SITE_DESCRIPTION}}'
-                },
+                { name: 'description', content: siteConfig.description },
                 { name: 'robots', content: 'index, follow' },
 
                 /* Open Graph */
-                { property: 'og:title',       content: '{{SITE_NAME}} — {{HERO_HEADLINE}}' },
-                { property: 'og:description', content: '{{SITE_DESCRIPTION}}' },
-                { property: 'og:image',       content: '{{SITE_DOMAIN}}/logo.png' },
-                { property: 'og:url',         content: '{{SITE_DOMAIN}}' },
-                { property: 'og:type',        content: 'website' },
+                { property: 'og:title', content: `${siteConfig.siteName} — ${siteConfig.hero.headline}` },
+                { property: 'og:description', content: siteConfig.description },
+                { property: 'og:image', content: `${siteUrl}/og-image.jpg` },
+                { property: 'og:url', content: siteUrl },
+                { property: 'og:type', content: 'website' },
 
                 /* Twitter */
-                { name: 'twitter:card',        content: 'summary_large_image' },
-                { name: 'twitter:title',       content: '{{SITE_NAME}} — {{HERO_HEADLINE}}' },
-                { name: 'twitter:description', content: '{{SITE_DESCRIPTION}}' },
-                { name: 'twitter:image',       content: '{{SITE_DOMAIN}}/logo.png' }
+                { name: 'twitter:card', content: 'summary_large_image' },
+                { name: 'twitter:title', content: `${siteConfig.siteName} — ${siteConfig.hero.headline}` },
+                { name: 'twitter:description', content: siteConfig.description },
+                { name: 'twitter:image', content: `${siteUrl}/og-image.jpg` }
             ],
             link: [
-                { rel: 'canonical', href: '{{SITE_DOMAIN}}' },
-
-                // Fonts (no @nuxtjs/google-fonts needed)
+                { rel: 'canonical', href: siteUrl },
                 { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
                 { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
                 {
                     rel: 'stylesheet',
-                    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap'
+                    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Russo+One&display=swap'
                 },
-
-                // Favicon
                 { rel: 'icon', type: 'image/png', href: '/favicon.png' }
             ],
             script: [
-                /* Plausible Analytics (new domain) */
                 {
                     src: 'https://plausible.io/js/script.js',
                     defer: true,
-                    'data-domain': '{{ANALYTICS_DOMAIN}}'
-                },
-                /* Google Tag Manager - handled in components for better compatibility */
+                    'data-domain': analyticsDomain
+                }
             ]
         }
     },
 
-    // Nuxt Image (IPX)
     image: {
         provider: 'ipx',
         quality: 75,
@@ -77,40 +67,30 @@ export default defineNuxtConfig({
         formats: 'webp'
     },
 
-    // Global CSS (your brand + utility classes live here)
     css: ['~/assets/main.css'],
 
-    modules: [
-        '@nuxt/image',
-        '@nuxtjs/sitemap',
-        '@nuxtjs/tailwindcss'
-    ],
+    modules: ['@nuxt/image', '@nuxtjs/sitemap', '@nuxtjs/tailwindcss'],
 
     tailwindcss: {
         cssPath: '~/assets/main.css',
         configPath: 'tailwind.config.js'
     },
 
-    // Sitemap (module uses this for absolute URLs)
     site: {
-        url: '{{SITE_DOMAIN}}',
-        name: '{{SITE_NAME}}'
-        // You can customize routes/exclude later if needed
+        url: siteConfig.siteUrl,
+        name: siteConfig.siteName
     },
 
-    // Compatibility date
     compatibilityDate: '2025-04-10',
-    
-    // Dev server configuration
+
     devServer: {
         port: 3000
     },
-    
-    // Runtime config to avoid serialization issues
+
     runtimeConfig: {
         public: {
-            siteName: '{{SITE_NAME}}',
-            siteUrl: '{{SITE_DOMAIN}}'
+            siteName: siteConfig.siteName,
+            siteUrl: siteConfig.siteUrl
         }
     }
 })

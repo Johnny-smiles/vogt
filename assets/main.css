@@ -1,16 +1,20 @@
 /* assets/main.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Russo+One&display=swap');
+
 /* 1) Tailwind layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 2) Brand tokens (from the business card) */
+/* 2) Brand tokens (Vogt Electric palette) */
 :root {
-    --brand-dark:    #0b2b2e;  /* deep slate for text */
-    --brand-primary: #0f8f93;  /* teal (left gradient) */
-    --brand-primary-2:#60c3cb; /* teal-light (right gradient) */
-    --brand-accent:  #ffd166;  /* warm highlight (CTA alt) */
-    --brand-light:   #f5f7f9;  /* page background */
+    --brand-dark:    #1A1A1A;
+    --brand-primary: #4A592E;
+    --brand-primary-2:#303A1B;
+    --brand-accent:  #6B6B6B;
+    --brand-light:   #F8F8F8;
+    --radius-pill:   999px;
+    --radius-card:   24px;
 }
 
 /* 3) Base element tweaks */
@@ -24,63 +28,83 @@
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Russo One', 'Inter', sans-serif;
         color: var(--brand-dark);
-        font-weight: 700;
-        line-height: 1.2;
+        font-weight: 400;
+        letter-spacing: 0.015em;
+        line-height: 1.15;
+        text-transform: uppercase;
     }
 
     a {
         color: var(--brand-primary);
         text-decoration: none;
+        transition: color 200ms ease;
     }
     a:hover {
-        opacity: .9;
+        color: color-mix(in srgb, var(--brand-primary) 85%, white 15%);
     }
 
     /* Accessible focus ring */
     :focus-visible {
-        outline: 2px solid var(--brand-primary);
+        outline: 3px solid color-mix(in srgb, var(--brand-primary) 70%, white 30%);
         outline-offset: 2px;
+        border-radius: 6px;
     }
 }
 
 /* 4) Re-usable components & helpers */
 @layer components {
-    /* Primary CTA (teal) */
+    /* Primary CTA (rounded capsule with subtle shadow) */
     .btn-primary {
-        @apply inline-flex items-center justify-center font-semibold rounded-md px-6 py-3 transition;
+        @apply inline-flex items-center justify-center font-semibold tracking-wide uppercase px-7 py-3 transition shadow-lg shadow-black/15;
+        border-radius: var(--radius-pill);
         color: #fff;
-        background-color: var(--brand-primary);
+        background-image: linear-gradient(130deg, var(--brand-primary) 0%, var(--brand-primary-2) 100%);
     }
-    .btn-primary:hover { filter: brightness(.95); }
+    .btn-primary:hover {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+    }
 
-    /* Accent CTA (amber) */
+    /* Accent CTA (outline with soft fill on hover) */
     .btn-accent {
-        @apply inline-flex items-center justify-center font-semibold rounded-md px-6 py-3 transition;
-        color: #1f2937;
-        background-color: var(--brand-accent);
+        @apply inline-flex items-center justify-center font-medium tracking-wide uppercase px-6 py-3 transition border;
+        border-radius: var(--radius-pill);
+        color: #1A1A1A;
+        border-color: color-mix(in srgb, var(--brand-accent) 70%, transparent);
+        background: white;
     }
-    .btn-accent:hover { filter: brightness(.95); }
+    .btn-accent:hover {
+        background: color-mix(in srgb, var(--brand-accent) 15%, white 85%);
+        color: var(--brand-dark);
+    }
 
     /* Outline button */
     .btn-outline {
-        @apply inline-flex items-center justify-center font-semibold rounded-md px-6 py-3 transition border;
+        @apply inline-flex items-center justify-center font-semibold tracking-wide uppercase px-6 py-3 transition border;
+        border-radius: var(--radius-pill);
         color: var(--brand-primary);
         border-color: var(--brand-primary);
         background: transparent;
     }
-    .btn-outline:hover { background-color: color-mix(in srgb, var(--brand-primary) 10%, transparent); }
+    .btn-outline:hover {
+        background-color: color-mix(in srgb, var(--brand-primary) 18%, transparent);
+        color: #fff;
+    }
 
     /* Link button style */
     .btn-link {
-        @apply inline-flex items-center font-semibold underline underline-offset-2;
+        @apply inline-flex items-center font-semibold uppercase tracking-wide;
+        gap: 0.5rem;
         color: var(--brand-primary);
     }
 
     /* Info card */
     .card-box {
-        @apply bg-white rounded-xl shadow-md p-6;
+        @apply bg-white/95 backdrop-blur-sm shadow-[0_20px_40px_-20px_rgba(0,0,0,0.45)] p-8;
+        border-radius: var(--radius-card);
+        border: 1px solid color-mix(in srgb, var(--brand-primary) 35%, transparent);
     }
 
     /* Section wrapper */
@@ -90,21 +114,23 @@
 
     /* Nav link */
     .nav-link {
-        @apply inline-flex items-center;
+        @apply inline-flex items-center font-medium tracking-wide uppercase;
         color: var(--brand-dark);
     }
     .nav-link:hover { color: var(--brand-primary); }
 
     /* Chips / pills */
     .chip {
-        @apply inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm;
+        @apply inline-flex items-center gap-2 border px-3 py-1 text-xs font-semibold tracking-wide uppercase;
+        border-radius: var(--radius-pill);
         border-color: color-mix(in srgb, var(--brand-dark) 15%, transparent);
         background: #fff;
+        letter-spacing: 0.08em;
     }
 
     /* Brand gradient helpers */
     .bg-brand-gradient {
-        background-image: linear-gradient(90deg, var(--brand-primary) 0%, var(--brand-primary-2) 100%);
+        background-image: radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 45%), linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-2) 100%);
     }
     .text-brand-primary   { color: var(--brand-primary); }
     .border-brand-primary { border-color: var(--brand-primary); }
