@@ -30,7 +30,7 @@ export default defineNuxtConfig({
                 /* Open Graph */
                 { property: 'og:title', content: `${siteConfig.siteName} — ${siteConfig.hero.headline}` },
                 { property: 'og:description', content: siteConfig.description },
-                { property: 'og:image', content: `${siteUrl}/og-image.jpg` },
+                { property: 'og:image', content: `${siteUrl}/logo.png` },
                 { property: 'og:url', content: siteUrl },
                 { property: 'og:type', content: 'website' },
 
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
                 { name: 'twitter:card', content: 'summary_large_image' },
                 { name: 'twitter:title', content: `${siteConfig.siteName} — ${siteConfig.hero.headline}` },
                 { name: 'twitter:description', content: siteConfig.description },
-                { name: 'twitter:image', content: `${siteUrl}/og-image.jpg` }
+                { name: 'twitter:image', content: `${siteUrl}/logo.png` }
             ],
             link: [
                 { rel: 'canonical', href: siteUrl },
