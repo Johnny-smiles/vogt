@@ -4,7 +4,7 @@
         <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
             <!-- Logo (no image file needed) -->
             <NuxtLink to="/" class="flex items-center gap-3">
-                <img src="/logo.png" :alt="`${siteConfig.siteName} Logo`" class="w-10 h-10 rounded object-cover" />
+                <img src="/logo.png" :alt="`${siteConfig.siteName} Logo`" class="w-20 h-20 rounded object-contain" />
                 <span class="font-semibold">{{ siteConfig.siteName }}</span>
             </NuxtLink>
 
