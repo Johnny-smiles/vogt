@@ -15,4 +15,10 @@
 import NavBar from '~/components/NavBar.vue'
 import Footer from '~/components/Footer.vue'
 import GoogleTagManager from '~/components/GoogleTagManager.vue'
+
+useHead({
+  link: [
+    { rel: 'icon', type: 'image/png', href: '/logo.png' }
+  ]
+})
 </script>
