@@ -52,9 +52,10 @@ export default defineNuxtConfig({
             ],
             script: [
                 {
-                    src: 'https://plausible.io/js/script.js',
+                    src: 'https://plausible.io/js/script.exclusions.js',
                     defer: true,
-                    'data-domain': analyticsDomain
+                    'data-domain': analyticsDomain,
+                    'data-exclude': '/wp-admin/*,/wp-login.php,/wp-content/*,/wp-includes/*,/wp-config.php,/xmlrpc.php,/wordpress/*,/phpmyadmin/*,/pma/*,/myadmin/*,/administrator/*,/admin.php,/.env,/.env.*,/.git/*,/.aws/*,/.ssh/*,/.htaccess,/shell.php,/cmd.php,/eval.php,/cgi-bin/*'
                 }
             ]
         }
